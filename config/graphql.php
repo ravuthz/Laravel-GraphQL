@@ -1,6 +1,5 @@
 <?php
 
-
 return [
 
     /*
@@ -46,7 +45,7 @@ return [
      *     'mutation' => '\Folklore\GraphQL\GraphQLController@mutation'
      * ]
      */
-    'controllers' => \Folklore\GraphQL\GraphQLController::class.'@query',
+    'controllers' => \Folklore\GraphQL\GraphQLController::class . '@query',
 
     /*
      * The name of the input variable that contain variables when you query the
@@ -84,7 +83,7 @@ return [
      */
     'graphiql' => [
         'routes' => '/graphiql/{graphql_schema?}',
-        'controller' => \Folklore\GraphQL\GraphQLController::class.'@graphiql',
+        'controller' => \Folklore\GraphQL\GraphQLController::class . '@graphiql',
         'middleware' => [],
         'view' => 'graphql::graphiql',
         'composer' => \Folklore\GraphQL\View\GraphiQLComposer::class,
@@ -124,12 +123,13 @@ return [
     'schemas' => [
         'default' => [
             'query' => [
-
+                'tasks' => \App\GraphQL\Query\TasksQuery::class,
             ],
             'mutation' => [
-
-            ]
-        ]
+                'newTask' => \App\GraphQL\Mutation\NewTaskMutation::class,
+                'updateTaskStatus' => \App\GraphQL\Mutation\UpdateTaskStatusMutation::class,
+            ],
+        ],
     ],
 
     /*
@@ -181,7 +181,7 @@ return [
      * ]
      */
     'types' => [
-
+        'Task' => \App\GraphQL\Type\TaskType::class,
     ],
 
     /*
@@ -205,6 +205,6 @@ return [
     'security' => [
         'query_max_complexity' => null,
         'query_max_depth' => null,
-        'disable_introspection' => false
-    ]
+        'disable_introspection' => false,
+    ],
 ];
